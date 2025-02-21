@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exams - Student System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .select-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #ededed;
+        }
+        select {
+            appearance: none;
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #fff;
+            background-color: #111;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        select:hover, select:focus {
+            border-color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background-color: #333;
+            border-radius: 12px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #fff;
+            border-radius: 12px;
+            transition: width 0.5s ease-in-out;
+        }
+        .summary {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .summary-item {
+            text-align: center;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .summary-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .summary-label {
+            font-size: 18px;
+            color: #888;
+            margin-top: 5px;
+        }
+        .selection-display {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .table th, .table td {
+            font-size: 16px;
+            padding: 15px;
+        }
+        .table th {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2>Student System</h2>
+            <nav>
+                <a href="dashboard.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                    Overview
+                </a>
+                <a href="exams.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    Exams
+                </a>
+                <a href="learningpath.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+
+                   Learning Path
+                </a>
+                <a href="studyplan.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+                    AI Study Plan
+                </a>
+                <a href="chatbot.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+
+                    Chat Bot
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    Settings
+                </a>
+                <a href="feedback.html" class="nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"/><path d="M12 4h9"/><path d="M3 12h18"/><path d="M5 9l-4 3 4 3"/>
+                    </svg>
+                    Feedback
+                </a>
+            </nav>
+        </div>
+        <div class="main-content">
+            <h1>Exam Results</h1>
+            <div class="card">
+                <div class="selection-display" id="selection-display">Select Your Exam Details</div>
+                <div class="form-group">
+                    <div class="select-wrapper">
+                        <select id="year-select" onchange="updateSemesters()">
+                            <option value="">Select a year</option>
+                            <option value="1">Year 1</option>
+                            <option value="2">Year 2</option>
+                            <option value="3">Year 3</option>
+                            <option value="4">Year 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="select-wrapper">
+                        <select id="semester-select" onchange="updateExams()" disabled>
+                            <option value="">Select a semester</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="select-wrapper">
+                        <select id="exam-select" onchange="showExamResults()" disabled>
+                            <option value="">Select an exam</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="exam-results" style="display: none;">
+                    <h3 id="exam-title"></h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exam-results-body">
+                        </tbody>
+                    </table>
+                    <div class="progress-bar">
+                        <div id="progress" class="progress"></div>
+                    </div>
+                    <div class="summary">
+                        <div class="summary-item">
+                            <div id="average-score" class="summary-value">-</div>
+                            <div class="summary-label">Average Score</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateSelectionDisplay() {
+            const yearSelect = document.getElementById('year-select');
+            const semesterSelect = document.getElementById('semester-select');
+            const examSelect = document.getElementById('exam-select');
+            const selectionDisplay = document.getElementById('selection-display');
+
+            let displayText = 'Select Your Exam Details';
+
+            if (yearSelect.value) {
+                displayText = `Year ${yearSelect.value}`;
+                if (semesterSelect.value) {
+                    displayText += ` - Semester ${semesterSelect.value}`;
+                    if (examSelect.value) {
+                        displayText += ` - ${examSelect.options[examSelect.selectedIndex].text}`;
+                    }
+                }
+            }
+
+            selectionDisplay.textContent = displayText;
+        }
+
+        function updateSemesters() {
+            const yearSelect = document.getElementById('year-select');
+            const semesterSelect = document.getElementById('semester-select');
+            const examSelect = document.getElementById('exam-select');
+            
+            semesterSelect.innerHTML = '<option value="">Select a semester</option>';
+            examSelect.innerHTML = '<option value="">Select an exam</option>';
+            
+            if (yearSelect.value) {
+                semesterSelect.disabled = false;
+                semesterSelect.innerHTML += `
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                `;
+            } else {
+                semesterSelect.disabled = true;
+                examSelect.disabled = true;
+            }
+            
+            document.getElementById('exam-results').style.display = 'none';
+            updateSelectionDisplay();
+        }
+
+        function updateExams() {
+            const semesterSelect = document.getElementById('semester-select');
+            const examSelect = document.getElementById('exam-select');
+            
+            examSelect.innerHTML = '<option value="">Select an exam</option>';
+            
+            if (semesterSelect.value) {
+                examSelect.disabled = false;
+                examSelect.innerHTML += `
+                    <option value="mid1">Mid 1</option>
+                    <option value="mid2">Mid 2</option>
+                    <option value="final">Final Exam</option>
+                `;
+            } else {
+                examSelect.disabled = true;
+            }
+            
+            document.getElementById('exam-results').style.display = 'none';
+            updateSelectionDisplay();
+        }
+
+        function showExamResults() {
+            const yearSelect = document.getElementById('year-select');
+            const semesterSelect = document.getElementById('semester-select');
+            const examSelect = document.getElementById('exam-select');
+            const examResults = document.getElementById('exam-results');
+            const examTitle = document.getElementById('exam-title');
+            const examResultsBody = document.getElementById('exam-results-body');
+            const progress = document.getElementById('progress');
+            const averageScore = document.getElementById('average-score');
+
+            if (examSelect.value) {
+                examResults.style.display = 'block';
+                examTitle.textContent = `Year ${yearSelect.value}, Semester ${semesterSelect.value}, ${examSelect.options[examSelect.selectedIndex].text}`;
+                
+                // Sample data - replace with actual data from your backend
+                const subjects = [
+                    { name: 'Mathematics', marks: 85 },
+                    { name: 'Physics', marks: 78 },
+                    { name: 'Chemistry', marks: 82 },
+                    { name: 'Computer Science', marks: 90 },
+                ];
+
+                examResultsBody.innerHTML = '';
+                let totalMarks = 0;
+
+                subjects.forEach(subject => {
+                    const grade = getGrade(subject.marks);
+                    const row = `
+                        <tr>
+                            <td>${subject.name}</td>
+                            <td>${subject.marks}</td>
+                            <td>${grade}</td>
+                        </tr>
+                    `;
+                    examResultsBody.innerHTML += row;
+                    totalMarks += subject.marks;
+                });
+
+                const avgMarks = totalMarks / subjects.length;
+                progress.style.width = `${avgMarks}%`;
+                averageScore.textContent = avgMarks.toFixed(2);
+            } else {
+                examResults.style.display = 'none';
+            }
+            updateSelectionDisplay();
+        }
+
+        function getGrade(marks) {
+            if (marks >= 90) return 'A+';
+            if (marks >= 80) return 'A';
+            if (marks >= 70) return 'B';
+            if (marks >= 60) return 'C';
+            if (marks >= 50) return 'D';
+            return 'F';
+        }
+    </script>
+</body>
+</html>
+
