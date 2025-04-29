@@ -120,7 +120,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
   }
 
   const filePath = req.file.path;
-  const scriptPath = path.join(__dirname, "backend", "app.py"); // Ensure correct path
+  const scriptPath = "/Users/kbhuvan/Documents/ALLPROJECTS/StudentSystem/back_end/app.py"; // Ensure correct path
 
   const pythonProcess = spawn("python3", [scriptPath, filePath]);
 

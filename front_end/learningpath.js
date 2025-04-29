@@ -50,7 +50,7 @@ async function handleFileUpload(file) {
     formData.append('file', file);
 
     try {
-        const response = await fetch('http://localhost:5000/upload', {
+        const response = await fetch('http://localhost:3000/upload', {
             method: 'POST',
             body: formData
         });
@@ -89,7 +89,7 @@ async function sendMessage() {
     const loadingObj = showLoadingDots();
 
     try {
-        const response = await fetch('http://localhost:5000/chat', {
+        const response = await fetch('http://localhost:3000/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

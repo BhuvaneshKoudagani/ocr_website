@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Student Evaluation System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,35 +27,9 @@
     </div>
 
     <script>
-        // Attach event listener to the form
-        document.getElementById('loginForm').addEventListener('submit', async function (event) {
-            event.preventDefault(); // Prevent form submission
-
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                // Send POST request to backend login route
-                const response = await fetch('http://localhost:3000/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username: email, password: password })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('token', data.token);
-                    window.location.href = 'dashboard.html';  
-                } else {
-                    alert(data.message); 
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Login failed! Please try again.');
-            }
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents default form submission
+            window.location.href = "dashboard.html"; // Redirect to dashboard.html
         });
     </script>
 </body>
